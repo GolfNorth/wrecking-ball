@@ -1,17 +1,19 @@
 ﻿using Cysharp.Threading.Tasks;
-using Game.SDK.Components;
 using Game.SDK.Services.Interfaces;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using VContainer;
 
-namespace Game
+namespace Game.SDK.Components
 {
     /// <summary>
-    /// Последовательность действий перед запуском игры
+    /// Компонент загрузки сцен
     /// </summary>
-    public class Preloader : MonoBehaviour
+    public class SceneLoader : MonoBehaviour
     {
+        [SerializeField]
+        private bool loadOnStart;
+
         [SerializeField]
         private SceneSettings[] scenes;
 
@@ -25,13 +27,24 @@ namespace Game
 
         private async void Start()
         {
+            if (!loadOnStart)
+                return;
+
+            await LoadAsync();
+        }
+
+        public async void Load()
+        {
+            await LoadAsync();
+        }
+
+        public async UniTask LoadAsync()
+        {
             await Addressables.InitializeAsync();
 
             var loadSceneTasks = scenes.Select(x => _sceneService.LoadSceneAsync(x.Key, x.LoadMode, x.ActivateOnLoad));
 
             await UniTask.WhenAll(loadSceneTasks);
-
-            Destroy(this);
         }
     }
 }
