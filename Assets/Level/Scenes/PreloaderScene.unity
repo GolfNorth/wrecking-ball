@@ -206,7 +206,8 @@ MonoBehaviour:
   parentReference:
     TypeName: Game.SDK.Context.GlobalLifetimeScope
   autoRun: 1
-  autoInjectGameObjects: []
+  autoInjectGameObjects:
+  - {fileID: 7807019287486929480}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
