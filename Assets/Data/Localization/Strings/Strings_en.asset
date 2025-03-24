@@ -16,12 +16,38 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: eb174a45f6e59564e900be97adf7ab75, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 1367907373986873358
   m_TableData:
   - m_Id: 17911070720
     m_Localized: Start Game
     m_Metadata:
       m_Items: []
+  - m_Id: 34482003722240
+    m_Localized: Main Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 34705111334912
+    m_Localized: Retry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38931266879488
+    m_Localized: 'High Score: {0}'
+    m_Metadata:
+      m_Items:
+      - rid: 1367907373986873358
+  - m_Id: 39126784360448
+    m_Localized: 'Last Score: {0}'
+    m_Metadata:
+      m_Items:
+      - rid: 1367907373986873358
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 1367907373986873358
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 38931266879488
+        - id: 39126784360448

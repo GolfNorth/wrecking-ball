@@ -16,13 +16,6 @@ namespace Game.SDK.Context
         [SerializeField]
         private AudioService audioService;
 
-        protected override void Awake()
-        {
-            base.Awake();
-
-            DontDestroyOnLoad(this);
-        }
-
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterComponent(audioService).As<IAudioService>();
