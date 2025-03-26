@@ -15,6 +15,6 @@ namespace Game.SDK.Infrastructure.Interfaces
         /// <summary>
         /// Подписаться на событие
         /// </summary>
-        IObservable<TEvent> OnEvent<TEvent>() where TEvent : class;
+        IDisposable Subscribe<TEvent>(Action<TEvent> onNext) where TEvent : class;
     }
 }

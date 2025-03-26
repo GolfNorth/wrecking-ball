@@ -2,6 +2,9 @@
 
 namespace Game.Infrastructure
 {
+    /// <summary>
+    /// Реализация системы лучшего результата
+    /// </summary>
     public class HighScoreSystem : IHighScoreSystem
     {
         public int HighScore { get; private set; }

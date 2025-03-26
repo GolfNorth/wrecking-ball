@@ -19,11 +19,12 @@ namespace Game.SDK.Infrastructure
             subject.OnNext(eventMessage);
         }
 
-        public IObservable<TEvent> OnEvent<TEvent>() where TEvent : class
+        public IDisposable Subscribe<TEvent>(Action<TEvent> onNext) where TEvent : class
         {
             var subject = GetOrCreateSubject<TEvent>();
+            var adapter = new ActionToObserverAdapter<TEvent>(onNext);
 
-            return subject.AsObservable();
+            return subject.Subscribe(adapter);
         }
 
         private ISubject<TEvent> GetOrCreateSubject<TEvent>() where TEvent : class

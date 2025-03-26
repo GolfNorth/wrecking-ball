@@ -1,6 +1,4 @@
-﻿using System;
-using Game.Infrastructure;
-using TMPro;
+﻿using Game.Infrastructure;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
