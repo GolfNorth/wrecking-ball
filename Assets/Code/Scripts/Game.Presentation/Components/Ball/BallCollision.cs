@@ -30,6 +30,8 @@ namespace Game.Presentation.Components
 
         private Coroutine _detectionRoutine;
 
+        private Coroutine _gameOverRoutine;
+
         private IEventBus _eventBus;
 
         private Collider2D _lastCollider;
@@ -52,6 +54,7 @@ namespace Game.Presentation.Components
             if (_detectionRoutine == null)
             {
                 _detectionRoutine = StartCoroutine(DetectCollision());
+                _gameOverRoutine = StartCoroutine(GameOver());
             }
             else
             {
@@ -65,18 +68,12 @@ namespace Game.Presentation.Components
 
             while (_cooldown > 0)
             {
-                var delay = _lastCollider.CompareTag(gameOverTag) ? gameOverDelay : detectionDelay;
-
-                yield return new WaitForSeconds(delay);
+                yield return new WaitForSeconds(detectionDelay);
 
                 _cooldown -= detectionDelay;
             }
 
-            if (_lastCollider.CompareTag(gameOverTag))
-            {
-                _eventBus.Publish(new BallOverFilledEvent());
-            }
-            else if (_lastCollider.CompareTag(zoneTag))
+            if (_lastCollider.CompareTag(zoneTag))
             {
                 var zone = _lastCollider.gameObject.GetComponent<ZonePosition>();
 
@@ -88,6 +85,22 @@ namespace Game.Presentation.Components
             }
 
             _detectionRoutine = null;
+
+            if (_gameOverRoutine != null)
+            {
+                StopCoroutine(_gameOverRoutine);
+                _gameOverRoutine = null;
+            }
+        }
+
+        private IEnumerator GameOver()
+        {
+            yield return new WaitForSeconds(gameOverDelay);
+
+            if (_lastCollider.CompareTag(gameOverTag))
+            {
+                _eventBus.Publish(new BallOverFilledEvent());
+            }
         }
     }
 }
